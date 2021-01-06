@@ -1,7 +1,7 @@
 import { Body, Controller, HttpCode, Post, Request, UseGuards } from '@nestjs/common';
 
 import { AuthLocalGuard } from 'src/guards/auth-local.guard';
-import { UserDto } from 'src/models/user.model';
+import { LoginDto, UserDto } from 'src/models/user.model';
 import { AuthenticationService } from 'src/providers/authentication';
 import { UserService } from 'src/providers/user';
 
@@ -12,17 +12,17 @@ export class AuthenticationController {
 
     @UseGuards(AuthLocalGuard)
     @Post('login')
-    async login(@Request() req) {
-        return this.authService.login(req.user);
+    async login(@Body() user: LoginDto) {
+        return this.authService.login(user);
     }
 
-    @Post('signup')
-    @HttpCode(201)
-    async signup(@Body() body: UserDto) {
-        if(body.password === body.passwordConfirm) {
-            return this.userService.create(body);
-        }
-        return false;
-    }
+    // @Post('signup')
+    // @HttpCode(201)
+    // async signup(@Body() body: UserDto) {
+    //     if(body.password === body.passwordConfirm) {
+    //         return this.userService.create(body);
+    //     }
+    //     return false;
+    // }
 
 }
