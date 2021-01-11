@@ -6,10 +6,12 @@ import { Clients } from './providers/clients';
 
 import { AuthenticationModule } from './authentication/authentication.module';
 import { UsersModule } from './users/users.module';
+import { SkillsController } from './skills/skills.controller';
+import { Skills } from './providers/skills';
 
 @Module({
     imports: [AuthenticationModule, UsersModule],
-    controllers: [AppController, ClientsController],
-    providers: [AppService, Clients],
+    controllers: [AppController, ClientsController, SkillsController],
+    providers: [AppService, Clients, Skills],
 })
 export class AppModule { }
